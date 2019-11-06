@@ -2,8 +2,9 @@ const axios = require('axios');
 const fs = require('fs');
 
 class MatchesAggregator {
-  constructor({ apiKey }) {
+  constructor(apiKey, config) {
     this.apiKey = apiKey;
+    this.config = config;
     this.http = axios.create({
       baseURL: 'https://app.oddsapi.io/api/v1/',
       headers: {
@@ -15,9 +16,6 @@ class MatchesAggregator {
   }
 
   async run() {
-    // let { data } = await this.http.get('odds', {
-    //   params: { sport: 'soccer', country: 'france' }
-    // });
     let { data } = await this.http.get('odds');
     fs.writeFileSync(
       './output.api_response.json',
@@ -68,6 +66,7 @@ class MatchesAggregator {
 
     for (let site of sites) {
       // if (typeof site !== 'object') continue;
+      if (!this.config.allowExchanges && site.exchange) continue;
 
       let odds = Object.entries(site.odds);
 
@@ -119,8 +118,7 @@ class MatchesAggregator {
       let brokers = '';
 
       for (let odd of crescentOdds) {
-        if (odd.value === crescentOdds[0].value)
-          brokers += `/${odd.broker}`;
+        if (odd.value === crescentOdds[0].value) brokers += `/${odd.broker}`;
       }
       let highestOdd = {
         name: betOption.name, // ex: 1

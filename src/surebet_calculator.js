@@ -1,14 +1,18 @@
 class SurebetCalculator {
-  constructor(bets) {
+  constructor(bets, config) {
     if (bets) this.bets = bets;
     this.surebets = [];
+    this.config = config;
   }
 
-  run(bets) {
+  extract(bets) {
     if (bets) this.bets = bets;
     if (!this.bets) throw 'No bets received.';
 
-    return this.findSurebets();
+    this.findSurebets();
+    this.calculateInvestment();
+
+    return this.surebets;
   }
 
   findSurebets() {
@@ -28,14 +32,24 @@ class SurebetCalculator {
       }
 
       if (sum < 1) {
-        profit = (1 - sum) * 100;
+        profit = (1 - sum) * this.config.earnings;
         this.surebets.push({ ...bet, rate: sum, profit });
       }
     }
     console.log(`Evaluating ${this.bets.length} bets`);
     console.log(`Found ${this.surebets.length} surebets`);
     this.surebets = this.surebets.sort((betA, betB) => betA.rate - betB.rate);
-    return this.surebets;
+  }
+
+  calculateInvestment() {
+    for (let bet of this.surebets) {
+      let investment = {};
+
+      for (let odd of bet.odds) {
+        investment[odd.name] = this.config.earnings * (1 / odd.value);
+      }
+      bet.investment = investment;
+    }
   }
 }
 

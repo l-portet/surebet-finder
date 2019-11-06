@@ -1,21 +1,22 @@
 const MatchesAggregator = require('./matches_aggregator');
 const SurebetCalculator = require('./surebet_calculator');
 
-const config = require('../config.js');
-
 class SurebetFinder {
-  constructor(apiKey) {
-    this.aggregator = new MatchesAggregator(apiKey);
-    this.calculator = new SurebetCalculator();
+  constructor(apiKey, config) {
+    this.config = config;
+    this.aggregator = new MatchesAggregator(apiKey, config);
+    this.calculator = new SurebetCalculator(null, config);
 
     this.surebets = [];
     this.bets = [];
+
+    console.log(config);
   }
   async run() {
     await this.aggregator.run();
 
     this.bets = this.aggregator.getBets();
-    this.surebets = this.calculator.run(this.bets);
+    this.surebets = this.calculator.extract(this.bets);
   }
 
   getSurebets() {
