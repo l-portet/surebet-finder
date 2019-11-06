@@ -1,3 +1,3 @@
 const config = {};
 
-module.exports = confg;
+module.exports = config;
