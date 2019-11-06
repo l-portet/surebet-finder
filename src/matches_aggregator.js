@@ -39,12 +39,13 @@ class MatchesAggregator {
         league: rawMatch.league.name,
         teamA: rawMatch.event.home,
         teamB: rawMatch.event.away,
-        startTime: rawMatch.event.start_time
+        startTime: rawMatch.event.start_time,
+        lastUpdated: rawMatch.sites.last_updated
       };
 
       match.bets = [];
 
-      delete rawMatch.sites.last_updated; // TEMP
+      delete rawMatch.sites.last_updated;
       bets = Object.entries(rawMatch.sites);
 
       for (let bet of bets) {
@@ -115,10 +116,17 @@ class MatchesAggregator {
       let crescentOdds = betOption.odds.sort(
         (oddA, oddB) => oddB.value - oddA.value
       );
+      let brokers = '';
+
+      for (let odd of crescentOdds) {
+        if (odd.value === crescentOdds[0].value)
+          brokers += `/${odd.broker}`;
+      }
       let highestOdd = {
         name: betOption.name, // ex: 1
         value: crescentOdds[0].value, // ex: 2.3
-        broker: crescentOdds[0].broker // ex: Betclic
+        broker: brokers, // ex: Betclic
+        otherOdds: crescentOdds
       };
 
       odds.push(highestOdd);

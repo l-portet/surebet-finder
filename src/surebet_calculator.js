@@ -30,13 +30,9 @@ class SurebetCalculator {
       if (sum < 1) {
         profit = (1 - sum) * 100;
         this.surebets.push({ ...bet, rate: sum, profit });
-        console.log('Surebet found!!');
-        console.log(`[PROFIT FOR 100€] ${(1 - sum) * 100}`);
-      } else {
-        // console.log('No surebet here..')
       }
     }
-    console.log(`Evaluating ${this.bets.length} matches`);
+    console.log(`Evaluating ${this.bets.length} bets`);
     console.log(`Found ${this.surebets.length} surebets`);
     this.surebets = this.surebets.sort((betA, betB) => betA.rate - betB.rate);
     return this.surebets;
