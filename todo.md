@@ -5,3 +5,5 @@
 - Add the possiibility of multiple sources of data (api)
 - Add a config file
 - Show how much to bet on each odd
+- Add the option to select only some bookmakers
+- Sync it with a webapp ?

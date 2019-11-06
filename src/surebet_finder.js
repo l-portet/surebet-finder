@@ -1,6 +1,8 @@
 const MatchesAggregator = require('./matches_aggregator');
 const SurebetCalculator = require('./surebet_calculator');
 
+const config = require('../config.js');
+
 class SurebetFinder {
   constructor(apiKey) {
     this.aggregator = new MatchesAggregator(apiKey);
