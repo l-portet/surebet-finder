@@ -20,7 +20,7 @@ class MatchesAggregator {
     // });
     let { data } = await this.http.get('odds');
     fs.writeFileSync(
-      './api_response.json',
+      './output.api_response.json',
       JSON.stringify(data, null, 2),
       'utf-8'
     );
