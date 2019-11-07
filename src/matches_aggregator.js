@@ -124,7 +124,7 @@ class MatchesAggregator {
         name: betOption.name, // ex: 1
         value: crescentOdds[0].value, // ex: 2.3
         broker: brokers, // ex: Betclic
-        otherOdds: crescentOdds
+        allOdds: crescentOdds
       };
 
       odds.push(highestOdd);
