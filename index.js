@@ -4,7 +4,6 @@ const fs = require('fs');
 const config = require('./config.js');
 
 (async function() {
-  console.log(apiKey)
   let bot = new SurebetFinder(apiKey, config);
   let surebets;
 

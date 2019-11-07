@@ -9,8 +9,6 @@ class SurebetFinder {
 
     this.surebets = [];
     this.bets = [];
-
-    console.log(config);
   }
   async run() {
     await this.aggregator.run();
