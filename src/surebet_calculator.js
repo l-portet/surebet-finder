@@ -1,3 +1,5 @@
+const chalk = require('chalk');
+
 class SurebetCalculator {
   constructor(bets, config) {
     if (bets) this.bets = bets;
@@ -36,8 +38,6 @@ class SurebetCalculator {
         this.surebets.push({ ...bet, rate: sum, profit });
       }
     }
-    console.log(`Evaluating ${this.bets.length} bets`);
-    console.log(`Found ${this.surebets.length} surebets`);
     this.surebets = this.surebets.sort((betA, betB) => betA.rate - betB.rate);
   }
 
@@ -48,8 +48,25 @@ class SurebetCalculator {
       for (let odd of bet.odds) {
         investment[odd.name] = this.config.earnings * (1 / odd.value);
       }
+      this.printVerbose(bet);
       bet.investment = investment;
     }
+    console.log(chalk.yellow(`Evaluating ${this.bets.length} bets`));
+    console.log(chalk.cyan(`Found ${this.surebets.length} surebets`));
+  }
+
+  printVerbose(bet) {
+    console.log(
+      chalk.bold(
+        `${bet.info.teamA} - ${bet.info.teamB} ${chalk.green(
+          '±' + Math.round((bet.profit * 100) / 100) + '%'
+        )}`
+      )
+    );
+    console.log(`${bet.info.sport}\t${bet.info.league}`);
+    for (let odd of bet.odds)
+      console.log(`${odd.name} @${odd.value.toFixed(2)} ${odd.broker.split('/').join(' - ')}`)
+    console.log('');
   }
 }
 

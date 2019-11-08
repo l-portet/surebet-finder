@@ -120,6 +120,9 @@ class MatchesAggregator {
       for (let odd of crescentOdds) {
         if (odd.value === crescentOdds[0].value) brokers += `/${odd.broker}`;
       }
+
+      brokers = brokers.substr(1);
+
       let highestOdd = {
         name: betOption.name, // ex: 1
         value: crescentOdds[0].value, // ex: 2.3

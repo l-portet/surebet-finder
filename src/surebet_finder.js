@@ -15,6 +15,8 @@ class SurebetFinder {
 
     this.bets = this.aggregator.getBets();
     this.surebets = this.calculator.extract(this.bets);
+
+    return this.surebets;
   }
 
   getSurebets() {
