@@ -10,5 +10,10 @@ const config = require('./config.js');
   await bot.run();
   surebets = bot.getSurebets();
 
-  fs.writeFileSync('./output.json', JSON.stringify(surebets, null, 2), 'utf-8');
+  let content = {
+    time: new Date(),
+    data: surebets
+  };
+
+  fs.writeFileSync('./output.json', JSON.stringify(content, null, 2), 'utf-8');
 })();
