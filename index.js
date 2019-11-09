@@ -16,4 +16,5 @@ const config = require('./config.js');
   };
 
   fs.writeFileSync('./output.json', JSON.stringify(content, null, 2), 'utf-8');
+
 })();

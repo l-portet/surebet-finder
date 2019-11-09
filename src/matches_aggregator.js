@@ -1,5 +1,4 @@
 const axios = require('axios');
-const fs = require('fs');
 
 class MatchesAggregator {
   constructor(apiKey, config) {
@@ -17,11 +16,6 @@ class MatchesAggregator {
 
   async run() {
     let { data } = await this.http.get('odds');
-    fs.writeFileSync(
-      './output.api_response.json',
-      JSON.stringify(data, null, 2),
-      'utf-8'
-    );
 
     this.cleanMatchesData(data);
     this.separateMatchesToBets();
