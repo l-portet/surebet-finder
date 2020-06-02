@@ -1,4 +1,4 @@
-const SurebetFinder = require('./src/surebet_finder.js');
+const SurebetFinder = require('./src/surebet-finder.js');
 const apiKey = require('dotenv').config().parsed.API_KEY;
 const fs = require('fs');
 const config = require('./config.js');

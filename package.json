@@ -2,7 +2,7 @@
   "name": "surebet-finder",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/surebet-finder.js",
   "scripts": {
     "dev": "node --inspect-brk index.js",
     "start": "node index.js"
