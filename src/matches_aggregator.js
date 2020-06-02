@@ -15,7 +15,13 @@ class MatchesAggregator {
   }
 
   async run() {
-    let { data } = await this.http.get('odds');
+    let data;
+    try {
+      ({ data } = await this.http.get('odds'));
+    } catch (e) {
+      console.error('Error: Unable to call API');
+      throw e;
+    }
 
     this.cleanMatchesData(data);
     this.separateMatchesToBets();
