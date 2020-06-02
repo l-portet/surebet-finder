@@ -1,5 +1,5 @@
-const MatchesAggregator = require('./matches_aggregator');
-const SurebetCalculator = require('./surebet_calculator');
+const MatchesAggregator = require('./aggregator');
+const SurebetCalculator = require('./calculator');
 
 class SurebetFinder {
   constructor(apiKey, config) {
