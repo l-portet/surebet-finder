@@ -10,7 +10,7 @@
   "author": "lucas.portet <lucasportet@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.28.0",
     "chalk": "^2.4.2",
     "dotenv": "^8.2.0"
   }
